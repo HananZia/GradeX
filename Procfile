@@ -1,0 +1,1 @@
+web: gunicorn GradeX.wsgi --log-file -

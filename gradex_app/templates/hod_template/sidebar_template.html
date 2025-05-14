@@ -1,0 +1,358 @@
+{% load static %}
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a class="brand-link">
+      <img src="{% static 'dist/img/applogo.png' %}" alt="GradeX Logo" class="brand-image img-circle elevation-3" style="opacity: .9;">
+      <span class="brand-text logo-text">Grade<span class="highlight">X</span></span>
+    </a>  
+    
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static "dist/img/AdminLTELogo.png" %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="{% url 'admin_profile' %}" class="d-block">{{ user.username }}</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            {% url 'admin_home' as admin_home %}
+            <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Home
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            {% url 'add_staff' as add_staff %}
+            <a href="{{ add_staff }}" class="nav-link {% if request.path == add_staff %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Staff
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+              {% url 'manage_staff' as manage_staff %}
+            {% url 'edit_staff' staff_id=id as edit_staff %}
+            <a href="{% url 'manage_staff' %}" class="nav-link {% if request.path == manage_staff %} active {% endif %} {% if request.path == edit_staff %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Staff
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+              {% url 'add_student' as add_student %}
+            <a href="{% url 'add_student' %}" class="nav-link {% if request.path == add_student %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Student
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+              {% url 'manage_student' as manage_student %}
+              {% url 'edit_student' student_id=id as edit_student %}
+            <a href="{% url 'manage_student' %}" class="nav-link {% if request.path == manage_student %} active {% endif %} {% if request.path == edit_student %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Students
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'add_course' as add_course %}
+            <a href="{% url 'add_course' %}" class="nav-link {% if request.path == add_course %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Course
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'manage_course' as manage_course %}
+              {% url 'edit_course' course_id=id as edit_course %}
+            <a href="{% url 'manage_course' %}" class="nav-link {% if request.path == manage_course %} active {% endif %} {% if request.path == edit_course %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Course
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'add_subject' as add_subject %}
+            <a href="{% url 'add_subject' %}" class="nav-link {% if request.path == add_subject %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Subject
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'manage_subject' as manage_subject %}
+            {% url 'edit_subject' subject_id=id as edit_subject %}
+            <a href="{% url 'manage_subject' %}" class="nav-link {% if request.path == manage_subject %} active {% endif %} {% if request.path == edit_subject %} active {% endif %} ">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Subject
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'manage_session' as manage_session %}
+            <a href="{% url 'manage_session' %}" class="nav-link {% if request.path == manage_session %} active {% endif %} ">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Session Year
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
+             {% url 'student_feedback_message' as student_feedback_message %}
+            <a href="{% url 'student_feedback_message' %}" class="nav-link {% if request.path == student_feedback_message %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Student Feedback
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+               {% url 'staff_feedback_message' as staff_feedback_message %}
+            <a href="{% url 'staff_feedback_message' %}" class="nav-link {% if request.path == staff_feedback_message %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Staff Feedback
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+               {% url 'student_leave_view' as student_leave_view %}
+            <a href="{% url 'student_leave_view' %}" class="nav-link {% if request.path == student_leave_view %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Student Leave
+              </p>
+            </a>
+          </li>
+            <li class="nav-item">
+                 {% url 'staff_leave_view' as staff_leave_view %}
+            <a href="{% url 'staff_leave_view' %}" class="nav-link {% if request.path == staff_leave_view %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Staff Leave
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'admin_view_attendance' as admin_view_attendance %}
+             <a href="{% url 'admin_view_attendance' %}" class="nav-link {% if request.path == admin_view_attendance %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                View Attendance
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'admin_send_notification_staff' as admin_send_notification_staff %}
+             <a href="{% url 'admin_send_notification_staff' %}" class="nav-link {% if request.path == admin_send_notification_staff %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Send Staff Notification
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% url 'admin_send_notification_student' as admin_send_notification_student %}
+             <a href="{% url 'admin_send_notification_student' %}" class="nav-link {% if request.path == admin_send_notification_student %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Send Student Notification
+              </p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <style>
+    /* Sidebar background and branding */
+/* Main sidebar wrapper */
+.main-sidebar {
+  background: linear-gradient(135deg, rgba(30,58,138,0.95), rgba(59,130,246,0.95));
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+/* Logo text refined */
+.logo-text {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f3f4f6;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+  transition: color 0.3s ease;
+  text-transform: none; /* Ensures no auto-uppercase */
+}
+
+.logo-text .highlight {
+  color: #facc15;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Optional hover effect */
+.brand-link:hover .logo-text {
+  color: #fef3c7;
+}
+
+/* Brand logo section */
+.brand-link {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f3f4f6;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.brand-link:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #fde68a;
+}
+
+.brand-image {
+  margin-right: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* User panel */
+.user-panel {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 15px;
+}
+
+.user-panel .info a {
+  color: #e0e7ff;
+  font-weight: 500;
+}
+
+.user-panel .info a:hover {
+  color: #facc15;
+}
+/* Brand text styling */
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f3f4f6;
+  letter-spacing: 1px;
+  margin-left: 5px;
+  transition: color 0.3s ease;
+}
+
+.logo-text .highlight {
+  color: #facc15;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* On hover */
+.brand-link:hover .logo-text {
+  color: #fef08a;
+}
+
+/* Sidebar spacing cleanup */
+.main-sidebar {
+  padding-top: 10px;
+}
+
+.sidebar {
+  padding: 10px 10px 30px 10px;
+}
+
+/* Optional: slight spacing under nav items */
+.nav-sidebar .nav-item {
+  margin-bottom: 4px;
+}
+
+/* Navigation links */
+.nav-sidebar .nav-link {
+  color: #dbeafe;
+  font-weight: 500;
+  padding: 10px 15px;
+  margin: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.nav-sidebar .nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+  box-shadow: inset 0 0 5px rgba(255,255,255,0.1);
+}
+
+.nav-sidebar .nav-icon {
+  margin-right: 10px;
+  color: #c7d2fe;
+  transition: color 0.3s ease;
+}
+
+.nav-sidebar .nav-link:hover .nav-icon {
+  color: #facc15;
+}
+
+/* Active link styling */
+.nav-sidebar .nav-link.active {
+  background-color: #1e40af;
+  color: #ffffff;
+  border-left: 4px solid #facc15;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+}
+
+/* Submenu (if used) */
+.nav-treeview .nav-link {
+  padding-left: 30px;
+  font-size: 13px;
+  background: rgba(255,255,255,0.03);
+  color: #cbd5e1;
+}
+
+.nav-treeview .nav-link:hover {
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+}
+
+/* Scrollbar appearance */
+.main-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.main-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+  </style>

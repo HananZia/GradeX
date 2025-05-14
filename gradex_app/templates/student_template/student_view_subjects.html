@@ -1,0 +1,37 @@
+{% extends 'student_template/base_template.html' %}
+
+{% block content %}
+<h3>Your Subjects</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Subject Name</th>
+            <th>Teacher</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{ subject.subject_name }}</td>
+            <td>{{ subject.staff_id.first_name }} {{ subject.staff_id.last_name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>Subjects found: {{ subjects|length }}</p>
+<ul>
+{% for s in subjects %}
+    <li>{{ s.subject_name }}</li>
+{% endfor %}
+</ul>
+
+<p>Total subjects found: {{ subjects|length }}</p>
+
+{% if subjects %}
+    <p>First subject's course ID: {{ subjects.0.course_id.id }}</p>
+{% else %}
+    <p>No subjects found. Please check if you're assigned a course and that course has subjects.</p>
+{% endif %}
+<table border="1" cellspacing="0" cellpadding="8">
+{% endblock %}

@@ -1,0 +1,623 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Home
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ student_count }}</h3>
+
+                <p>Total Students</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="{% url 'manage_student' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ staff_count }}</h3>
+
+                <p>Total Staffs</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="{% url 'manage_staff' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ course_count }}</h3>
+
+                <p>Total Course</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="{% url 'manage_course' %}" class="small-box-footer" class="new">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{ subject_count }}</h3>
+
+                <p>Total Subject</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="{% url 'manage_subject' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+          <div class="row">
+              <div class="col-lg-6">
+                <div class="card card-danger">
+                  <div class="card-header">
+                    <h3 class="card-title">Student and Staff Chart</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+              <div class="col-lg-6">
+                   <div class="card card-success">
+                  <div class="card-header">
+                    <h3 class="card-title">Total Subject in Each Courses</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6">
+                 <div class="card card-info">
+                  <div class="card-header">
+                    <h3 class="card-title">Total Student in Each Course</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="pieChart3" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+              <div class="col-lg-6">
+                 <div class="card card-warning">
+                  <div class="card-header">
+                    <h3 class="card-title">Total Student in Each Subject</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="pieChart4" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="card card-success">
+                  <div class="card-header">
+                    <h3 class="card-title">Staff Leaves vs Attendance</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="chart">
+                      <canvas id="barChart1" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="card card-success">
+                  <div class="card-header">
+                    <h3 class="card-title">Student Leaves vs Attendance</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="chart">
+                      <canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+{% block custom_js %}
+<script>
+    $(document).ready(function(){
+
+            var pieData        = {
+                  labels: [
+                      'Students',
+                      'Staffs'
+                  ],
+                  datasets: [
+                    {
+                      data: [{{ student_count }},{{ staff_count }}],
+                      backgroundColor : ['#f56954', '#00a65a'],
+                    }
+                  ]
+             };
+
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieOptions     = {
+              maintainAspectRatio : false,
+              responsive : true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+              type: 'pie',
+              data: pieData,
+              options: pieOptions
+            });
+
+            //Second Chart for Total Subject in Each Course
+                var subject_count_list={{ subject_count_list }};
+                var course_name_list={{ course_name_list|safe }};
+                var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+                var donutData        = {
+                  labels:course_name_list,
+                  datasets: [
+                    {
+                      data: subject_count_list,
+                      backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                    }
+                  ]
+                }
+                var donutOptions     = {
+                  maintainAspectRatio : false,
+                  responsive : true,
+                }
+                //Create pie or douhnut chart
+                // You can switch between pie and douhnut using the method below.
+                var donutChart = new Chart(donutChartCanvas, {
+                  type: 'doughnut',
+                  data: donutData,
+                  options: donutOptions
+                });
+
+
+                //show total student in each course
+                var student_count_list_in_course={{ student_count_list_in_course }};
+
+                  var pieData2        = {
+                          labels:course_name_list,
+                          datasets: [
+                            {
+                              data: student_count_list_in_course,
+                              backgroundColor : ['#f56954', '#00a65a','#aa00ff', '#ff3d00'],
+                            }
+                          ]
+                     };
+
+                    var pieChartCanvas2 = $('#pieChart3').get(0).getContext('2d')
+                    var pieOptions2     = {
+                      maintainAspectRatio : false,
+                      responsive : true,
+                    }
+                    var pieChart = new Chart(pieChartCanvas2, {
+                      type: 'pie',
+                      data: pieData2,
+                      options: pieOptions2
+                    });
+
+                //show total student in each Subject
+                var student_count_list_in_subject={{ student_count_list_in_subject }};
+                var subject_list={{ subject_list|safe }};
+
+                  var pieData3  = {
+                          labels:subject_list,
+                          datasets: [
+                            {
+                              data: student_count_list_in_subject,
+                              backgroundColor : ['#f56954', '#00a65a','#aa00ff', '#ff3d00','#bf360c','#ffff00','#00e676','#40c4ff','#f56954', '#00a65a','#aa00ff', '#ff3d00','#bf360c','#ffff00','#00e676','#40c4ff'],
+                            }
+                          ]
+                     };
+
+                    var pieChartCanvas3 = $('#pieChart4').get(0).getContext('2d')
+                    var pieOption3     = {
+                      maintainAspectRatio : false,
+                      responsive : true,
+                    }
+                    var pieChart = new Chart(pieChartCanvas3, {
+                      type: 'pie',
+                      data: pieData3,
+                      options: pieOption3
+                    });
+
+                        ///Staff Leave vs Attendance Bar Chart
+                        var attendance_present_list_staff={{ attendance_present_list_staff }};
+                        var attendance_absent_list_staff={{ attendance_absent_list_staff }};
+                        var staff_name_list={{ staff_name_list|safe }};
+                        var barChartData = {
+                          labels  : staff_name_list,
+                          datasets: [
+                            {
+                              label               : 'Leaves',
+                              backgroundColor     : 'rgba(60,141,188,0.9)',
+                              borderColor         : 'rgba(60,141,188,0.8)',
+                              pointRadius          : false,
+                              pointColor          : '#3b8bba',
+                              pointStrokeColor    : 'rgba(60,141,188,1)',
+                              pointHighlightFill  : '#fff',
+                              pointHighlightStroke: 'rgba(60,141,188,1)',
+                              data                : attendance_absent_list_staff
+                            },
+                            {
+                              label               : 'Attendance',
+                              backgroundColor     : 'rgba(210, 214, 222, 1)',
+                              borderColor         : 'rgba(210, 214, 222, 1)',
+                              pointRadius         : false,
+                              pointColor          : 'rgba(210, 214, 222, 1)',
+                              pointStrokeColor    : '#c1c7d1',
+                              pointHighlightFill  : '#fff',
+                              pointHighlightStroke: 'rgba(220,220,220,1)',
+                              data                : attendance_present_list_staff
+                            },
+                          ]
+                        }
+                        var barChartCanvas = $('#barChart1').get(0).getContext('2d')
+                        var temp0 = barChartData.datasets[0]
+                        var temp1 = barChartData.datasets[1]
+                        barChartData.datasets[0] = temp1
+                        barChartData.datasets[1] = temp0
+
+                        var barChartOptions = {
+                          responsive              : true,
+                          maintainAspectRatio     : false,
+                          datasetFill             : false
+                        }
+
+                        var barChart = new Chart(barChartCanvas, {
+                          type: 'bar',
+                          data: barChartData,
+                          options: barChartOptions
+                        })
+
+                        //Student Leaves vs Attendance
+                        var attendance_present_list_student={{ attendance_present_list_student }};
+                        var attendance_absent_list_student={{ attendance_absent_list_student }};
+                        var student_name_list={{ student_name_list|safe }};
+                        var barChartData2 = {
+                          labels  : student_name_list,
+                          datasets: [
+                            {
+                              label               : 'Leaves',
+                              backgroundColor     : 'rgba(60,141,188,0.9)',
+                              borderColor         : 'rgba(60,141,188,0.8)',
+                              pointRadius          : false,
+                              pointColor          : '#3b8bba',
+                              pointStrokeColor    : 'rgba(60,141,188,1)',
+                              pointHighlightFill  : '#fff',
+                              pointHighlightStroke: 'rgba(60,141,188,1)',
+                              data                : attendance_absent_list_student
+                            },
+                            {
+                              label               : 'Attendance',
+                              backgroundColor     : 'rgba(210, 214, 222, 1)',
+                              borderColor         : 'rgba(210, 214, 222, 1)',
+                              pointRadius         : false,
+                              pointColor          : 'rgba(210, 214, 222, 1)',
+                              pointStrokeColor    : '#c1c7d1',
+                              pointHighlightFill  : '#fff',
+                              pointHighlightStroke: 'rgba(220,220,220,1)',
+                              data                : attendance_present_list_student
+                            },
+                          ]
+                        }
+                        var barChartCanvas2 = $('#barChart2').get(0).getContext('2d')
+                        var temp02 = barChartData2.datasets[0]
+                        var temp12 = barChartData2.datasets[1]
+                        barChartData2.datasets[0] = temp12
+                        barChartData2.datasets[1] = temp02
+
+                        var barChartOptions2 = {
+                          responsive              : true,
+                          maintainAspectRatio     : false,
+                          datasetFill             : false
+                        }
+
+                        var barChart2 = new Chart(barChartCanvas2, {
+                          type: 'bar',
+                          data: barChartData2,
+                          options: barChartOptions2
+                        })
+
+
+
+    });
+</script>
+{% endblock custom_js %}
+{% block custom_css %}
+<style>
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7fafc;
+  color: #2d3748;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Page Title */
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: center;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Container */
+.content {
+  margin-top: 20px;
+}
+
+/* Stylish Small Boxes with subtle hover effects */
+.small-box {
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Subtle hover effect */
+}
+
+.small-box .inner {
+  color: #fff;
+  text-align: center;
+}
+
+.small-box .inner h3 {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.small-box .inner p {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Color Schemes for Each Box */
+.bg-info {
+  background: linear-gradient(145deg, #4f46e5, #6366f1);
+}
+
+.bg-success {
+  background: linear-gradient(145deg, #10b981, #34d399);
+}
+
+.bg-warning {
+  background: linear-gradient(145deg, #fbbf24, #facc15);
+}
+
+.bg-danger {
+  background: linear-gradient(145deg, #f87171, #f43f5e);
+}
+
+/* Hover Effect for Small Boxes */
+.small-box:hover {
+  transform: translateY(-5px); /* Slight lift */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.small-box-footer {
+  display: block;
+  text-align: center;
+  color: #f7fafc;
+  font-weight: 600;
+  padding: 10px 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Subtle hover effect for footer link */
+.small-box-footer:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Header Card */
+.card {
+  border-radius: 20px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 20px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #f7fafc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  background: #ffffff;
+  padding: 30px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+/* Canvas for charts */
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+.btn-tool {
+  color: #4f46e5;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  padding: 8px;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.btn-tool:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1); /* Subtle scaling on hover */
+}
+
+/* Sidebar Styling */
+.main-sidebar {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #f7fafc;
+  transition: background 0.3s ease-in-out;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f7fafc;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+.brand-image {
+  margin-right: 15px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.user-panel .info a {
+  color: #e0e7ff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect on user name link */
+.user-panel .info a:hover {
+  color: #fde68a;
+}
+
+.logo-text {
+  font-size: 26px;
+  font-weight: 800;
+  color: #f7fafc;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.logo-text .highlight {
+  color: #fde68a;
+}
+
+.nav-sidebar .nav-link {
+  color: #c7d2fe;
+  font-weight: 600;
+  padding: 12px 18px;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for active nav link */
+.nav-sidebar .nav-link:hover {
+  background-color: #4f46e5;
+  color: #fff;
+}
+
+.nav-sidebar .nav-icon {
+  margin-right: 10px;
+}
+
+/* Scrollbar for Sidebar */
+.main-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+}
+.new{
+  Color:white;
+}
+</style>
+{% endblock custom_css %}
