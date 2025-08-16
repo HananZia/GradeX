@@ -53,3 +53,33 @@ Data is stored securely in an **SQLite3 database** for easy setup and portabilit
 ```bash
 git clone https://github.com/HananZia/GradeX.git
 cd GradeX
+
+2. Create and Activate Virtual Environment
+python -m venv venv
+source venv/bin/activate    # Linux/Mac
+venv\Scripts\activate       # Windows
+
+3. Install Dependencies
+pip install -r requirements.txt
+
+4. Apply Database Migrations
+python manage.py makemigrations
+python manage.py migrate
+
+5. Create Superuser (for Admin Panel)
+python manage.py createsuperuser
+
+
+➡️ You’ll be prompted to enter a username, email, and password.
+
+6. Collect Static Files (for Bootstrap, CSS, JS)
+python manage.py collectstatic
+
+7. Run the Development Server
+python manage.py runserver
+
+
+By default, the app runs on:
+👉 Frontend & API: http://127.0.0.1:8000/
+👉 Admin Panel: http://127.0.0.1:8000/admin/
+
